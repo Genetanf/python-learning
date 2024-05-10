@@ -124,22 +124,103 @@
 
 # sample 2 
 # 定義一個裝飾器，計算1+2+...+50 的總和
-def calculate(callback):
-    def run():
-        result=0
-        for n in range(51):
-            result+=n
-        # 把計算結果透過參數傳到被裝飾的普通函式中
-        callback(result)
-    return run
+# def calculate(callback):
+#     def run():
+#         result=0
+#         for n in range(51):
+#             result+=n
+#         # 把計算結果透過參數傳到被裝飾的普通函式中
+#         callback(result)
+#     return run
 
-@calculate
-def show(data):
-    print("結果為:",data)
+# @calculate
+# def show(data):
+#     print("結果為:",data)
 
-@calculate
-def showEnglish(data):
-    print("Result is:",data)
+# @calculate
+# def showEnglish(data):
+#     print("Result is:",data)
 
-show()
-showEnglish()
+# show()
+# showEnglish()
+
+
+
+## 裝飾器工廠 - Decorator Factory
+# def myFactory(base):
+#     def myDeo(cb):
+#         def run():
+#             result=base*3
+#             cb(result)    
+#         return run
+#     return myDeo
+
+# @myFactory(3)
+# def test(numbers):
+#     print("普通函式程式",numbers)
+
+# test()
+
+# sample-2 計算 1+2+3+...+50 的裝飾器
+
+# def addDecorator(data):
+#     def mydecorator(callback):
+#         def run():
+#             total=0
+#             for n in range(data):
+#                 total+=n
+#             callback(total)
+#         return run
+#     return mydecorator
+
+# @addDecorator(51)
+# def function(result):
+#     print("總和為:", result)
+# function()
+
+# @addDecorator(101)
+# def function(result):
+#     print("總和為:", result)
+# function()
+
+
+
+## 錯誤、例外處理 - Syntax Error / Exception Handling
+# 例外處理情境: 轉換資料型態失敗
+# data=input("請輸入一個數字:")
+# try:
+#     number=int(data)
+# except Exception:
+#     number=0
+# number=number*2
+# print(number)
+
+# sample-2-使用者如果輸入的資料格式不能轉換成數字，請他重新輸入，直到成功為止
+# while True:
+#     data=input("請輸入一個數字:")
+#     try:
+#         number=int(data)
+#         break
+#     except Exception:
+#         print("輸入格式錯誤，請重新輸入:")
+
+# number=number*2
+# print(number)
+
+
+
+# 快速開始、網頁截圖 - Selenium 
+#載入 Selenium 相關模組
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+# 設定 Chrome Driver 的執行檔路徑
+options = Options()
+options.binary_location = "C:\\Users\\gtmia\\OneDrive\\Desktop\\Learning\\python\\company-data.txt"
+
+# 建立 Driver 物件實體，用程式操作瀏覽器運作
+driver = webdriver.Chrome()
+driver.maximize_window()    # 視窗最大化
+driver.get("https://www.google.com/")
+driver.save_screenshot("screenshot-Google.png")     # 做螢幕截圖
+driver.close()
