@@ -216,7 +216,7 @@ from selenium.webdriver.chrome.options import Options
 
 # 設定 Chrome Driver 的執行檔路徑
 options = Options()
-options.binary_location = "C:\\Users\\gtmia\\OneDrive\\Desktop\\Learning\\python\\company-data.txt"
+options.binary_location = "D:\\Learning\\python\\chromedriver.exe"
 
 # 建立 Driver 物件實體，用程式操作瀏覽器運作
 driver = webdriver.Chrome()
