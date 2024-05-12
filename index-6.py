@@ -211,16 +211,136 @@
 
 # 快速開始、網頁截圖 - Selenium 
 #載入 Selenium 相關模組
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+# from selenium import webdriver
+# from selenium.webdriver.chrome.options import Options
 
-# 設定 Chrome Driver 的執行檔路徑
-options = Options()
-options.binary_location = "D:\\Learning\\python\\chromedriver.exe"
+# # 設定 Chrome Driver 的執行檔路徑
+# options = Options()
+# options.binary_location = "D:\\Learning\\python\\chromedriver.exe"
 
-# 建立 Driver 物件實體，用程式操作瀏覽器運作
-driver = webdriver.Chrome()
-driver.maximize_window()    # 視窗最大化
-driver.get("https://www.google.com/")
-driver.save_screenshot("screenshot-Google.png")     # 做螢幕截圖
-driver.close()
+# # 建立 Driver 物件實體，用程式操作瀏覽器運作
+# driver = webdriver.Chrome()
+# driver.maximize_window()    # 視窗最大化
+# driver.get("https://www.google.com/")
+# driver.save_screenshot("screenshot-Google.png")     # 做螢幕截圖
+# driver.close()
+
+
+
+## 網頁爬蟲基礎 - Selenium
+# 載入 Selenium 相關模組
+# from selenium import webdriver
+# from selenium.webdriver.common.by import By
+# from selenium.webdriver.chrome.options import Options
+# # 設定 Chrome Driver 的執行路徑
+# options=Options()
+# options.chrome_executable_path="D:\\Learning\\python\\chromedriver.exe"
+# # 建立 Driver 物件實體，用程式操作瀏覽器運行
+# driver=webdriver.Chrome(options=options)
+
+# # 連線到 PTT 股票版
+# driver.get("https://www.ptt.cc/bbs/Stock/index.html")
+# # print(driver.page_source)   # 取得網頁原始碼
+
+# # 取得股票版中的文章標題
+# tags=driver.find_elements(By.CLASS_NAME,"title")     # 搜尋 class 屬性是 title 的所有標籤
+# for tag in tags:
+#     print(tag.text)
+
+# # 取得上一頁的文章標題
+# link=driver.find_element(By.LINK_TEXT,"‹ 上頁")
+# link.click()    # 模擬使用者點擊連結標籤
+# tags=driver.find_elements(By.CLASS_NAME,"title")     # 搜尋 class 屬性是 title 的所有標籤
+# for tag in tags:
+#     print(tag.text)
+
+# driver.close()
+
+
+
+## 網頁爬蟲 - 捲動視窗 - Selenium
+# from selenium import webdriver
+# from selenium.webdriver.chrome.options import Options
+# from selenium.webdriver.common.by import By
+# import time
+
+# options=Options()
+# options.chrome_executable_path="D:\\Learning\\python\\chromedriver.exe"
+
+# driver=webdriver.Chrome()
+# driver.get("https://www.linkedin.com/jobs/search?trk=guest_homepage-basic_guest_nav_menu_jobs&position=1&pageNum=0")
+
+# # 捲動視窗並等待瀏覽器載入更多內容
+# n=0
+# while n<3:
+#     driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")  # 捲動視窗到底部
+#     time.sleep(3)   # 等待三秒鐘
+#     n+=1
+
+# # 取得網頁中工作的標題
+# titleTags=driver.find_elements(By.CLASS_NAME,"base-search-card__info")
+# for titleTag in titleTags:
+#     print(titleTag.text)
+
+# driver.close()
+
+
+
+## 網頁爬蟲 - 登入帳戶 - Selenium
+# from selenium import webdriver
+# from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.common.by import By
+# from selenium.webdriver.chrome.options import Options
+# import time
+
+# options=Options
+# options.chrome_executable_path="D:\\Learning\\python\\chromedriver.exe"
+
+# driver=webdriver.Chrome()
+
+# # 連線到 LeetCode 登入畫面
+# driver.get("https://leetcode.com/accounts/login/?next=%2Fproblemset%2F")
+# time.sleep(5)
+
+# # 輸入帳號密碼: 按下登入按鈕
+# usernameInput=driver.find_element(By.ID,"id_login")
+# userPasswordInput=driver.find_element(By.ID,"id_password")
+# usernameInput.send_keys("GeneTang")
+# userPasswordInput.send_keys("gtmial9987")
+# time.sleep(3)
+# signbtn=driver.find_element(By.ID,"signin_btn")
+# signbtn.send_keys(Keys.ENTER)
+# time.sleep(5)
+
+# # 等待登入完成
+
+# # # 連線到登入後才能取得資料的葉面，並取得想要的資料
+# driver.get("https://leetcode.com/problemset/")
+# time.sleep(5)
+# stateElement=driver.find_element(By.CSS_SELECTOR,"[data-difficulty='TOTAL']")
+# print(stateElement.text)
+# # driver.close()
+
+
+
+## 讀取、寫入 CSV 格式檔案
+# 寫入 CSV 格式檔案
+# import csv
+# with open("data.csv",mode="w",newline="") as file:
+#     writer=csv.writer(file)
+#     writer.writerow([1,2,3])
+#     writer.writerow([4,5,6])
+#     writer.writerow([7,8,9])
+#     writer.writerow(["a","b","c"])
+
+# 讀取 CSV 格式檔案
+import csv
+with open("data.csv",mode="r",newline="") as file:
+    reader=csv.reader(file)
+    total=0
+    for row in reader:
+        for data in row:
+            data=int(data)
+            total=total+data
+    
+    print(total)
